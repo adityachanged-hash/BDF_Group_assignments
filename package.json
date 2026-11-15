@@ -1,0 +1,17 @@
+{
+  "name": "costumecloset-theatre",
+  "version": "1.0.0",
+  "description": "BDF Group Assignment - CostumeCloset Theatre backend API",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["express", "sqlite", "costume", "theatre"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "better-sqlite3": "^9.4.3",
+    "express": "^4.18.2"
+  }
+}

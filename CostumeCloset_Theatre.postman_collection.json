@@ -1,0 +1,334 @@
+{
+  "info": {
+    "name": "CostumeCloset Theatre API",
+    "_postman_id": "costumecloset-theatre-bdf",
+    "description": "BDF Group Assignment - PD-CSEDS2A-G08\nCostumeCloset Theatre Backend API\n\nBase URL: http://localhost:3000",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "🎭 Health Check",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:3000/",
+        "description": "Returns API status and available endpoints"
+      }
+    },
+    {
+      "name": "ACTORS",
+      "item": [
+        {
+          "name": "Get All Actors",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:3000/actors",
+            "description": "Returns all actors. Expected: 200"
+          }
+        },
+        {
+          "name": "Get One Actor",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:3000/actors/1",
+            "description": "Returns a single actor by ID. Expected: 200 or 404"
+          }
+        },
+        {
+          "name": "Add Actor",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:3000/actors",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Smith\"\n}"
+            },
+            "description": "Creates a new actor. Expected: 201"
+          }
+        },
+        {
+          "name": "Add Actor - Validation Error (missing name)",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:3000/actors",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{}"
+            },
+            "description": "Missing name field. Expected: 400"
+          }
+        },
+        {
+          "name": "Update Actor",
+          "request": {
+            "method": "PUT",
+            "url": "http://localhost:3000/actors/1",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Smith Updated\"\n}"
+            },
+            "description": "Updates an actor. Expected: 200"
+          }
+        },
+        {
+          "name": "Delete Actor",
+          "request": {
+            "method": "DELETE",
+            "url": "http://localhost:3000/actors/1",
+            "description": "Deletes an actor. Expected: 200"
+          }
+        }
+      ]
+    },
+    {
+      "name": "COSTUMES",
+      "item": [
+        {
+          "name": "Get All Costumes",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:3000/costumes",
+            "description": "Returns all costumes. Expected: 200"
+          }
+        },
+        {
+          "name": "Search Costumes by Era",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:3000/costumes?era=Victorian",
+              "query": [{ "key": "era", "value": "Victorian" }]
+            },
+            "description": "Filter costumes by era query param. Expected: 200"
+          }
+        },
+        {
+          "name": "Get One Costume",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:3000/costumes/1",
+            "description": "Returns a single costume. Expected: 200 or 404"
+          }
+        },
+        {
+          "name": "Add Costume",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:3000/costumes",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Victorian Ball Gown\",\n  \"era\": \"Victorian\"\n}"
+            },
+            "description": "Creates a new costume. Expected: 201"
+          }
+        },
+        {
+          "name": "Add Costume - Validation Error (missing era)",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:3000/costumes",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Some Costume\"\n}"
+            },
+            "description": "Missing era. Expected: 400"
+          }
+        },
+        {
+          "name": "Update Costume",
+          "request": {
+            "method": "PUT",
+            "url": "http://localhost:3000/costumes/1",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Victorian Ball Gown Updated\",\n  \"era\": \"Victorian\"\n}"
+            },
+            "description": "Updates a costume. Expected: 200"
+          }
+        },
+        {
+          "name": "Delete Costume",
+          "request": {
+            "method": "DELETE",
+            "url": "http://localhost:3000/costumes/1",
+            "description": "Deletes a costume. Expected: 200"
+          }
+        },
+        {
+          "name": "⭐ TOP 3 Costumes (Twist)",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:3000/costumes/top",
+            "description": "Returns top 3 most hired costumes with hire counts. Uses JOIN + GROUP BY. Ties sorted alphabetically. Expected: 200"
+          }
+        }
+      ]
+    },
+    {
+      "name": "HIRES",
+      "item": [
+        {
+          "name": "Get All Hires (Join)",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:3000/hires",
+            "description": "Returns all hires with actor name and costume name via JOIN. Expected: 200"
+          }
+        },
+        {
+          "name": "Get One Hire",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:3000/hires/1",
+            "description": "Returns a single hire with actor and costume names. Expected: 200 or 404"
+          }
+        },
+        {
+          "name": "Create Hire",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:3000/hires",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"actor_id\": 1,\n  \"costume_id\": 1,\n  \"hire_date\": \"2026-11-15\"\n}"
+            },
+            "description": "Creates a hire record. Expected: 201"
+          }
+        },
+        {
+          "name": "Create Hire - Validation Error",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:3000/hires",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"hire_date\": \"2026-11-15\"\n}"
+            },
+            "description": "Missing actor_id and costume_id. Expected: 400"
+          }
+        },
+        {
+          "name": "Update Hire",
+          "request": {
+            "method": "PUT",
+            "url": "http://localhost:3000/hires/1",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"actor_id\": 1,\n  \"costume_id\": 1,\n  \"hire_date\": \"2026-11-15\",\n  \"return_date\": \"2026-11-20\"\n}"
+            },
+            "description": "Updates a hire record. Expected: 200"
+          }
+        },
+        {
+          "name": "Delete Hire",
+          "request": {
+            "method": "DELETE",
+            "url": "http://localhost:3000/hires/1",
+            "description": "Deletes a hire. Expected: 200"
+          }
+        }
+      ]
+    },
+    {
+      "name": "🧪 TWIST TESTS (Top 3)",
+      "item": [
+        {
+          "name": "Test 1 - Create Actor A",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:3000/actors",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{ \"name\": \"Alice\" }" },
+            "description": "Expected: 201"
+          }
+        },
+        {
+          "name": "Test 1 - Create Actor B",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:3000/actors",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{ \"name\": \"Bob\" }" },
+            "description": "Expected: 201"
+          }
+        },
+        {
+          "name": "Test 1 - Create Costume X",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:3000/costumes",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{ \"name\": \"Knight Armour\", \"era\": \"Medieval\" }" },
+            "description": "Expected: 201"
+          }
+        },
+        {
+          "name": "Test 1 - Create Costume Y",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:3000/costumes",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{ \"name\": \"Ball Gown\", \"era\": \"Victorian\" }" },
+            "description": "Expected: 201"
+          }
+        },
+        {
+          "name": "Test 1 - Create Costume Z",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:3000/costumes",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{ \"name\": \"Space Suit\", \"era\": \"Futuristic\" }" },
+            "description": "Expected: 201"
+          }
+        },
+        {
+          "name": "Test 1 - Hire Costume X (Alice) ×3",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:3000/hires",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{ \"actor_id\": 1, \"costume_id\": 1 }" },
+            "description": "Run this 3 times. Expected: 201 each"
+          }
+        },
+        {
+          "name": "Test 1 - Hire Costume Y (Bob) ×2",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:3000/hires",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{ \"actor_id\": 2, \"costume_id\": 2 }" },
+            "description": "Run this 2 times. Expected: 201 each"
+          }
+        },
+        {
+          "name": "Test 1 - Hire Costume Z (Alice) ×1",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:3000/hires",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{ \"actor_id\": 1, \"costume_id\": 3 }" },
+            "description": "Run once. Expected: 201"
+          }
+        },
+        {
+          "name": "Test 2 - GET /costumes/top → 200, 3 costumes",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:3000/costumes/top",
+            "description": "Expected: 200, 3 costumes sorted highest hire_count first. Ties alphabetical."
+          }
+        }
+      ]
+    }
+  ]
+}

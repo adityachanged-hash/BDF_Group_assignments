@@ -1,0 +1,4 @@
+node_modules/
+costumecloset.db
+*.db
+.env
